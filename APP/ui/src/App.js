@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Title from './components/Title';
 import NavBar from './components/NavBar';
 import './App.css';
 import Container from '@material-ui/core/Container'
@@ -21,7 +20,6 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Title/>
                 < Container
                     maxWidth="md">
                     <NavBar getServers={this.getServers}/>

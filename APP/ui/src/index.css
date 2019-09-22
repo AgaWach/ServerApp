@@ -18,3 +18,25 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.Navbar_Toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding: 25px;
+}
+
+.Navbar_Search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    border-radius: 25px;
+}
+
+.Navbar_Search_Input {
+    background-color: inherit;
+    color:white;
+    border: none;
+}

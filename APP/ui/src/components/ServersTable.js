@@ -8,7 +8,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
 import Table from "@material-ui/core/Table";
 
-
 class ServersTable extends Component {
     constructor(props) {
         super(props);
@@ -17,8 +16,6 @@ class ServersTable extends Component {
             chosenServerId: '',
             servers: [],
         };
-        this.showDropdownMenu = this.showDropdownMenu.bind(this);
-        this.hideDropdownMenu = this.hideDropdownMenu.bind(this);
     };
 
     async turn(serverId, action) {
@@ -68,22 +65,6 @@ class ServersTable extends Component {
         }, 1000);
     }
 
-    showDropdownMenu(event) {
-        event.preventDefault();
-        this.setState({
-            displayMenu: true,
-        }, () => {
-            document.addEventListener('click', this.hideDropdownMenu);
-        });
-    }
-
-
-    hideDropdownMenu() {
-        this.setState({displayMenu: false}, () => {
-            document.removeEventListener('click', this.hideDropdownMenu);
-        });
-    }
-
     render() {
         return (
             <Paper>
@@ -103,7 +84,6 @@ class ServersTable extends Component {
                                 </TableCell>
                                 <TableCell align="left">{server.status}</TableCell>
                                 <TableCell align="right">
-                                    <Paper>
                                         {
                                             server.status === 'ONLINE' ? (
                                                 <div>
@@ -111,8 +91,7 @@ class ServersTable extends Component {
                                                         <Button onClick={() => this.turn(server.id, 'off')}>
                                                           Turn off
                                                             </Button>
-                                                        <Button
-                                                            onClick={() => this.turn(server.id, 'reboot')}>Reboot</Button>
+                                                        <Button onClick={() => this.turn(server.id, 'reboot')}>Reboot</Button>
                                                     </div>
                                                 </div>
                                             ) : (
@@ -125,8 +104,7 @@ class ServersTable extends Component {
                                                     <Button onClick={() => this.turn(server.id, 'on')}>
                                                       Turn on
                                                     </Button>
-                                                    <Button
-                                                        onClick={() => this.turn(server.id, 'reboot')}>
+                                                    <Button onClick={() => this.turn(server.id, 'reboot')}>
                                                       Reboot
                                                     </Button>
                                                 </div>
@@ -134,7 +112,6 @@ class ServersTable extends Component {
                                                 null
                                             )
                                         }
-                                    </Paper>
                                 </TableCell>
                             </TableRow>
                         ))}
