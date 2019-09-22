@@ -111,7 +111,6 @@ class ServersTable extends Component {
                                                     <Button onClick={() => this.turn(server.id, 'reboot')}>
                                                       Reboot
                                                     </Button>
-                                                    <Chart />
                                                     </Paper>
                                                 </div>
                                             ) : (

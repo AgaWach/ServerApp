@@ -50,7 +50,6 @@ class NavBar extends Component {
                                 <SearchIcon/>
                                 <input className ="Navbar_Search_Input"
                                     type="text"
-                                    placeholder="Search"
                                     onChange={this.handleChange}/>
                             </div>
                         </div>
