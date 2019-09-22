@@ -13,11 +13,28 @@ class ServersTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayMenu: false,
             chosenServerId: '',
             servers: [],
+            showMenu: false,
         };
+        this.showMenu = this.showMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
     };
+
+    showMenu(event) {
+        event.preventDefault(); 
+        this.setState({ showMenu: true }, () => {
+            document.addEventListener('click', this.closeMenu);
+          });
+    }
+
+    closeMenu(event) {
+        if (!this.dropdownMenu.contains(event.target)) {
+        this.setState({ showMenu: false }, () => {
+          document.removeEventListener('click', this.closeMenu);
+        });
+      }
+    }
 
     async turn(serverId, action) {
         this.setState({
@@ -74,7 +91,7 @@ class ServersTable extends Component {
                         <TableRow>
                             <TableCell>NAME</TableCell>
                             <TableCell align="left">STATUS</TableCell>
-                            <TableCell align="right">STATISTIC</TableCell>
+                            <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -93,16 +110,18 @@ class ServersTable extends Component {
                                                         <Button onClick={() => this.turn(server.id, 'off')}>
                                                           Turn Off </Button>
                                                         <Button onClick={() => this.turn(server.id, 'reboot')}>Reboot</Button>
-                                                        <Chart />
+                                                        <Button onClick={this.showMenu}>STATISTIC</Button>
+                                                        {this.state.showMenu ? (
+                                                        <div className="menu" ref={(element) => {this.dropdownMenu = element}}>
+                                                          <Chart />  
+                                                        </div>
+                                                        ): (
+                                                            null
+                                                        )}
                                                         </Paper>
                                                     </div>
                                                 </div>
                                             ) : (
-                                                null
-                                            )
-                                        }
-                                        {
-                                            server.status === 'OFFLINE' ? (
                                                 <div>
                                                     <Paper>
                                                     <Button onClick={() => this.turn(server.id, 'on')}>
@@ -113,8 +132,6 @@ class ServersTable extends Component {
                                                     </Button>
                                                     </Paper>
                                                 </div>
-                                            ) : (
-                                                null
                                             )
                                         }
                                 </TableCell>
