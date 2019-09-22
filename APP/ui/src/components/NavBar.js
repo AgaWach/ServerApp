@@ -4,6 +4,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 import ServersTable from "./ServersTable";
+import Chart from './Chart';
+
 
 class NavBar extends Component {
     constructor(props) {
@@ -35,10 +37,7 @@ class NavBar extends Component {
         return (
             <div>
                 <AppBar position="static">
-                    <Toolbar style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                    }}>
+                    <Toolbar className="Navbar_Toolbar">
                         <div>
                             <Typography display="block" variant="h6" noWrap>
                                 Servers
@@ -48,24 +47,14 @@ class NavBar extends Component {
                             </Typography>
                         </div>
                         <div>
-                            <div style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                border: "1px solid black",
-                                borderRadius: "25px"
-                            }}>
+                            <div className = "Navbar_Search">
                                 <SearchIcon/>
-                                <input
+                                <input className ="Navbar_Search_Input"
                                     type="text"
-                                    className="input"
                                     placeholder="Search"
-                                    onChange={this.handleChange}
-                                    style={{
-                                        border: "none",
-                                        backgroundColor: "inherit",
-                                    }}/>
+                                    onChange={this.handleChange}/>
                             </div>
+                            <Chart />
                         </div>
                     </Toolbar>
                 </AppBar>
