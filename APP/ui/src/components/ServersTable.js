@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
 import Table from "@material-ui/core/Table";
+import Chart from './Chart';
 
 class ServersTable extends Component {
     constructor(props) {
@@ -73,7 +74,7 @@ class ServersTable extends Component {
                         <TableRow>
                             <TableCell>NAME</TableCell>
                             <TableCell align="left">STATUS</TableCell>
-                            <TableCell align="right"></TableCell>
+                            <TableCell align="right">STATISTIC</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -88,10 +89,12 @@ class ServersTable extends Component {
                                             server.status === 'ONLINE' ? (
                                                 <div>
                                                     <div>
+                                                        <Paper>
                                                         <Button onClick={() => this.turn(server.id, 'off')}>
-                                                          Turn off
-                                                            </Button>
+                                                          Turn Off </Button>
                                                         <Button onClick={() => this.turn(server.id, 'reboot')}>Reboot</Button>
+                                                        <Chart />
+                                                        </Paper>
                                                     </div>
                                                 </div>
                                             ) : (
@@ -101,12 +104,15 @@ class ServersTable extends Component {
                                         {
                                             server.status === 'OFFLINE' ? (
                                                 <div>
+                                                    <Paper>
                                                     <Button onClick={() => this.turn(server.id, 'on')}>
                                                       Turn on
                                                     </Button>
                                                     <Button onClick={() => this.turn(server.id, 'reboot')}>
                                                       Reboot
                                                     </Button>
+                                                    <Chart />
+                                                    </Paper>
                                                 </div>
                                             ) : (
                                                 null

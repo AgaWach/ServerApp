@@ -4,7 +4,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 import ServersTable from "./ServersTable";
-import Chart from './Chart';
 
 
 class NavBar extends Component {
@@ -54,7 +53,6 @@ class NavBar extends Component {
                                     placeholder="Search"
                                     onChange={this.handleChange}/>
                             </div>
-                            <Chart />
                         </div>
                     </Toolbar>
                 </AppBar>
