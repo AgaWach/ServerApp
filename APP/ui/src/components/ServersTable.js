@@ -8,6 +8,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
 import Table from "@material-ui/core/Table";
 import Chart from './Chart';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import IconButton from '@material-ui/core/IconButton'
 
 class ServersTable extends Component {
     constructor(props) {
@@ -23,9 +25,7 @@ class ServersTable extends Component {
 
     showMenu(serverid) {
         let state = this.state;
-
         state.showMenu[serverid] = state.showMenu[serverid] === false || !state.showMenu[serverid];
-
         this.setState(state);
     }
 
@@ -50,7 +50,7 @@ class ServersTable extends Component {
                 if (result.data.status === 'REBOOTING') {
                     let server = {};
                     server = this.rebooting(serverId, server);
-                    //console.log(server.status);
+                    console.log(server.status);
                 }
                 this.props.servers[serverIndex].status = result.data.status;
                 this.setState({
@@ -115,31 +115,37 @@ class ServersTable extends Component {
                                 </TableCell>
                                 <TableCell align="left">{server.status}</TableCell>
                                 <TableCell align="right">
-                                        {
-                                            server.status === 'ONLINE' ? (
+                                <IconButton onClick={() => this.showMenu(server.id)} aria-label="more" aria-controls="long-menu" aria-haspopup="true" >
+                                 <MoreHorizIcon />  
+                                </IconButton>
+                                {this.state.showMenu[server.id] && this.state.showMenu[server.id] === true ? (
+                                    <div className="Menu" ref={(element) => {
+                                        this.dropdownMenu = element; }}>
+                                        {server.status === 'ONLINE' ? (
                                                 <div>
-                                                    <div>
+                                                    <div className="Menu_On">
                                                         <Button onClick={() => this.turn(server.id, 'off')}>
                                                           Turn Off </Button>
                                                         <Button onClick={() => this.turn(server.id, 'reboot')}>Reboot</Button>
-                                                        <Button onClick={() => { this.showMenu(server.id); }}>Statistics</Button>
-                                                        {this.state.showMenu[server.id] && this.state.showMenu[server.id] === true ? (
-                                                        <div className="menu" ref={(element) => {this.dropdownMenu = element}}>
-                                                          <Chart />  
-                                                        </div>
+                                                        <Chart />  
                                                         ): (
                                                             null
-                                                        )}
+                                                        )}                                                    
                                                     </div>
                                                 </div>
                                             ) : (
                                                 <div>
+                                                <div className="Menu_Off">
                                                     <Button onClick={() => this.turn(server.id, 'on')}>
                                                       Turn on
                                                     </Button>
                                                 </div>
+                                                </div>
                                             )
                                         }
+                                    </div>) : (
+                                        null
+                                    )}
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -41,9 +41,17 @@ code {
     border: none;
 }
 
-.Chart {
-    height: 350px;
-    width: 360px;
-    padding: 0;
-    margin-right: 0;
+.Menu_On {
+    border-radius: 10px;
+    width: 380px;
+}
+
+.Menu_Off {
+    border-radius: 10px;
+    width: 100px;
+}
+
+.Menu_On_Statistic{
+    width: 380px;
+    height: 400px;
 }
