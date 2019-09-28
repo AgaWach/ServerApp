@@ -15,17 +15,18 @@ class ServersTable extends Component {
         this.state = {
             chosenServerId: '',
             servers: [],
-            showMenu: false,
+            showMenu: [],
         };
         this.showMenu = this.showMenu.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
     };
 
-    showMenu(event) {
-        event.preventDefault(); 
-        this.setState({ showMenu: true }, () => {
-            document.addEventListener('click', this.closeMenu);
-          });
+    showMenu(serverid) {
+        let state = this.state;
+
+        state.showMenu[serverid] = state.showMenu[serverid] === false || !state.showMenu[serverid];
+
+        this.setState(state);
     }
 
     closeMenu(event) {
@@ -41,14 +42,15 @@ class ServersTable extends Component {
             servers: this.props.servers,
         });
         const result = await axios.put(`http://localhost:4454/servers/${serverId}/${action}`);
-        console.log({result});
+        //console.log(result.data.status);
         if (result.status === 200) {
             const serverIndex = this.props.servers.findIndex(x => x.id === result.data.id);
+            
             if (serverIndex > -1) {
                 if (result.data.status === 'REBOOTING') {
                     let server = {};
                     server = this.rebooting(serverId, server);
-                    console.log({server});
+                    //console.log(server.status);
                 }
                 this.props.servers[serverIndex].status = result.data.status;
                 this.setState({
@@ -72,12 +74,23 @@ class ServersTable extends Component {
                 }
             }, 1000);
         }
-        setInterval(async () => {
+        var intervalRebootin = setInterval(async () => {
             server = await axios.get(`http://localhost:4454/servers/${serverId}/`);
-            console.log(server);
             if (server.data.status === 'REBOOTING') {
                 await this.rebooting(serverId, server)
             } else {
+                clearInterval(intervalRebootin);
+
+                for (let index = 0; index < this.state.servers.length; index++) {
+                    let singleserver = this.state.servers[index];
+                    if(singleserver.id === server.data.id){
+                        let state = this.state;
+                        state.servers[index] = server.data;
+                        this.setState(state);
+                        return server;
+                    }
+                }
+
                 return server;
             }
         }, 1000);
@@ -110,8 +123,8 @@ class ServersTable extends Component {
                                                         <Button onClick={() => this.turn(server.id, 'off')}>
                                                           Turn Off </Button>
                                                         <Button onClick={() => this.turn(server.id, 'reboot')}>Reboot</Button>
-                                                        <Button onClick={this.showMenu}>STATISTIC</Button>
-                                                        {this.state.showMenu ? (
+                                                        <Button onClick={() => { this.showMenu(server.id); }}>Statistic</Button>
+                                                        {this.state.showMenu[server.id] && this.state.showMenu[server.id] === true ? (
                                                         <div className="menu" ref={(element) => {this.dropdownMenu = element}}>
                                                           <Chart />  
                                                         </div>

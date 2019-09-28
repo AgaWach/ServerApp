@@ -48,7 +48,6 @@ app.put('/servers/:serverId/off', (req, res) => {
 
 app.put(`/servers/:serverId/reboot`, (req, res) => {
   const foundServer = findServer(req, res);
-
   if (foundServer.status !== ONLINE) {
     return res.status(400).send({errorMessage: `Server is not online`});
   }
