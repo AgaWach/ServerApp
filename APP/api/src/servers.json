@@ -62,7 +62,7 @@
   {
     "id": 13,
     "name": " EU (Ireland)",
-    "status": "ONLINE"
+    "status": "OFFLINE"
   },
   {
     "id": 14,
@@ -72,7 +72,7 @@
   {
     "id": 15,
     "name": "EU (Paris)",
-    "status": "ONLINE"
+    "status": "OFFLINE"
   },
   {
     "id": 16,

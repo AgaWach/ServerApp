@@ -67,7 +67,7 @@ class Chart extends Component {
 
     render(){
         return(
-                <div className="Chart">
+                <div className="Menu_On_Statistic">
                     <Bar 
                     data={this.state.chartData}
                     legendPosition="bottom"
