@@ -10,6 +10,9 @@ import Table from "@material-ui/core/Table";
 import Chart from './Chart';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 class ServersTable extends Component {
     constructor(props) {
@@ -104,7 +107,7 @@ class ServersTable extends Component {
                         <TableRow>
                             <TableCell>NAME</TableCell>
                             <TableCell align="left">STATUS</TableCell>
-                            <TableCell align="right"></TableCell>
+                            <TableCell align="right">STATISTICS</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -121,28 +124,38 @@ class ServersTable extends Component {
                                 {this.state.showMenu[server.id] && this.state.showMenu[server.id] === true ? (
                                     <div className="Menu" ref={(element) => {
                                         this.dropdownMenu = element; }}>
+                                        {server.status === 'REBOOTING' ? (
+                                            <div className="Menu_Rebooting"><p>REBOOTING</p><CircularProgress />
+                                            </div>
+                                        ) : (null) }
                                         {server.status === 'ONLINE' ? (
                                                 <div>
                                                     <div className="Menu_On">
                                                         <Button onClick={() => this.turn(server.id, 'off')}>
-                                                          Turn Off </Button>
+                                                        <FormControlLabel
+                                                            control={<Switch color="secondary" />}
+                                                            label="Turn Off Server"
+                                                            labelPlacement="end"
+                                                            />
+                                                        </Button>
                                                         <Button onClick={() => this.turn(server.id, 'reboot')}>Reboot</Button>
                                                         <Chart />  
-                                                        ): (
-                                                            null
-                                                        )}                                                    
                                                     </div>
                                                 </div>
                                             ) : (
                                                 <div>
                                                 <div className="Menu_Off">
                                                     <Button onClick={() => this.turn(server.id, 'on')}>
-                                                      Turn on
+                                                    <FormControlLabel
+                                                            control={<Switch color="secondary" />}
+                                                            label="Turn On Server"
+                                                            labelPlacement="end"
+                                                            />
                                                     </Button>
                                                 </div>
                                                 </div>
                                             )
-                                        }
+                                        } 
                                     </div>) : (
                                         null
                                     )}

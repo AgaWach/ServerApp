@@ -44,14 +44,32 @@ code {
 .Menu_On {
     border-radius: 10px;
     width: 380px;
+    color:white;
+    border: 1px solid  rgb(195, 200, 235);
 }
 
 .Menu_Off {
+    display: flex;
+    justify-content: center;
     border-radius: 10px;
-    width: 100px;
+    width: 380px;
+    color:white;
+    border: 1px solid  rgb(195, 200, 235);
 }
 
 .Menu_On_Statistic{
     width: 380px;
     height: 400px;
+    background-color: rgb(195, 200, 235);
+    border-radius: 10px;
+}
+
+.Menu_Rebooting{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 380px;
+    height: 80px;
+    border: 1px solid  rgb(195, 200, 235);
+    border-radius: 10px;
 }
