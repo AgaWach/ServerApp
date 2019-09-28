@@ -119,11 +119,10 @@ class ServersTable extends Component {
                                             server.status === 'ONLINE' ? (
                                                 <div>
                                                     <div>
-                                                        <Paper>
                                                         <Button onClick={() => this.turn(server.id, 'off')}>
                                                           Turn Off </Button>
                                                         <Button onClick={() => this.turn(server.id, 'reboot')}>Reboot</Button>
-                                                        <Button onClick={() => { this.showMenu(server.id); }}>Statistic</Button>
+                                                        <Button onClick={() => { this.showMenu(server.id); }}>Statistics</Button>
                                                         {this.state.showMenu[server.id] && this.state.showMenu[server.id] === true ? (
                                                         <div className="menu" ref={(element) => {this.dropdownMenu = element}}>
                                                           <Chart />  
@@ -131,19 +130,13 @@ class ServersTable extends Component {
                                                         ): (
                                                             null
                                                         )}
-                                                        </Paper>
                                                     </div>
                                                 </div>
                                             ) : (
                                                 <div>
-                                                    <Paper>
                                                     <Button onClick={() => this.turn(server.id, 'on')}>
                                                       Turn on
                                                     </Button>
-                                                    <Button onClick={() => this.turn(server.id, 'reboot')}>
-                                                      Reboot
-                                                    </Button>
-                                                    </Paper>
                                                 </div>
                                             )
                                         }

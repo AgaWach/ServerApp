@@ -50,9 +50,9 @@ class Chart extends Component {
                     {
                         label: 'Conection quality',
                         data: [
-                            getRandomInt(100), 
-                            getRandomInt(10),
-                            getRandomInt(3),
+                            getRandomInt(1000), 
+                            getRandomInt(100),
+                            getRandomInt(30),
                         ],
                         backgroundColor: [
                             '#009F28',
@@ -67,7 +67,7 @@ class Chart extends Component {
 
     render(){
         return(
-                <div className="chart">
+                <div className="Chart">
                     <Bar 
                     data={this.state.chartData}
                     legendPosition="bottom"

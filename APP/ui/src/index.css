@@ -41,3 +41,9 @@ code {
     border: none;
 }
 
+.Chart {
+    height: 350px;
+    width: 360px;
+    padding: 0;
+    margin-right: 0;
+}
